@@ -29,4 +29,4 @@ python_version = "3.8"
 [scripts]
 # local developement only!
 dbshell = "sh -c 'env PGPASSWORD=secret psql -h 127.0.0.1 -p 5432 -d app -U app'"
-celery = "celery -A "
+celery = "celery -A app.tasks worker -l INFO --queues primary"
