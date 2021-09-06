@@ -1,5 +1,3 @@
-import os
-
 from fastapi import FastAPI
 from fastapi.routing import APIRouter
 
@@ -7,8 +5,7 @@ from app.core.config import settings
 from app.routers import blogs, users, auth
 from app.middlewares import AddProcessTimeHeaderMiddleware
 
-DEBUG = bool(os.getenv('DEBUG', False))
-if DEBUG:
+if settings.DEBUG:
     app = FastAPI(title=settings.SERVER_NAME)
 else:
     app = FastAPI(
