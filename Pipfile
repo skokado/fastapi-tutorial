@@ -1,0 +1,27 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+alembic = "*"
+fastapi = "*"
+uvicorn = {extras = ["standard"], version = "*"}
+gunicorn = "*"
+sqlalchemy = "*"
+passlib = {extras = ["bcrypt"], version = "*"}
+python-jose = "*"
+python-multipart = "*"
+python-dotenv = "*"
+psycopg2-binary = "*"
+
+[dev-packages]
+flake8 = "*"
+aiofiles = "*"
+
+[requires]
+python_version = "3.8"
+
+[scripts]
+# local developement only!
+dbshell = "sh -c 'env PGPASSWORD=secret psql -h 127.0.0.1 -p 5432 -d app -U app'"
