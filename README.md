@@ -24,6 +24,7 @@ ADMIN_SECRET_KEY=***
 ```
 
 ```shell
+$ # Postgresql
 $ docker run -d --rm \
    --name db \
   -p 5432:5432 \
@@ -31,6 +32,12 @@ $ docker run -d --rm \
   -e POSTGRES_PASSWORD=secret \
   -e POSTGRES_DB=app \
   postgres:13.4
+
+$ # redis
+$ docker run -d --rm \
+   --name redis \
+  -p 6379:6379 \
+  redis:6.2.5
 ```
 
 ## マイグレーション

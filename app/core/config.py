@@ -18,9 +18,13 @@ class Settings(BaseSettings):
     API_V1_STR: str = "/api"
     SERVER_NAME: str = 'Full Stack Tutorial'
     SECRET_KEY: str = secrets.token_urlsafe(32)
+    PROJECT_NAME: str = 'full-stack'
+
     DEBUG: bool = bool(os.getenv('DEBUG', False))
+
     # 60 minutes * 24 hours * 8 days = 8 days
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 8
+
     # BACKEND_CORS_ORIGINS is a JSON-formatted list of origins
     # e.g: '["http://localhost", "http://localhost:4200", "http://localhost:3000", \
     # "http://localhost:8080", "http://local.dockertoolbox.tiangolo.com"]'
@@ -36,8 +40,6 @@ class Settings(BaseSettings):
             return v
         raise ValueError(v)
 
-    PROJECT_NAME: str = 'full-stack'
-
     PGUSER = os.getenv('PGUSER', '')
     PGPASSWORD = os.getenv('PGPASSWORD', '')
     PGHOST = os.getenv('PGHOST', '127.0.0.1')
@@ -45,6 +47,10 @@ class Settings(BaseSettings):
     PGDATABASE = os.getenv('PGDATABASE', '')
     SQLALCHEMY_DATABASE_URI = 'postgresql://' + \
         f'{PGUSER}:{PGPASSWORD}@{PGHOST}:{PGPORT}/{PGDATABASE}'
+
+    REDIS_HOST = os.getenv('REDIS_HOST', '127.0.0.1')
+    REDIS_PORT = int(os.getenv('REDIS_PORT', 6379))
+    REDIS_DB = int(os.getenv('REDIS_DB', 0))
 
     @validator("SQLALCHEMY_DATABASE_URI", pre=True)
     def assemble_db_connection(cls, v: Optional[str],
