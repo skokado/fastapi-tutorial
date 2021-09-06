@@ -2,6 +2,7 @@ from fastapi import HTTPException, status
 from jose import JWTError, jwt
 
 from app.core.config import settings
+from app.core.security import ALGORITHM
 
 
 def verify_token(token: str):
@@ -12,7 +13,7 @@ def verify_token(token: str):
     )
     try:
         payload = jwt.decode(token, settings.SECRET_KEY,
-                             algorithms=[settings.ALGORITHM])
+                             algorithms=[ALGORITHM])
         username: str = payload.get("sub")
         if username is None:
             raise credentials_exception

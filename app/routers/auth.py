@@ -28,7 +28,5 @@ def login(request: OAuth2PasswordRequestForm = Depends(),
             detail=f'Authentication failed for user {request.username}'
         )
     # generate jwt and return
-    access_token = create_access_token(
-        data={"sub": user.name}
-    )
+    access_token = create_access_token(subject=user.name)
     return {"access_token": access_token, "token_type": "bearer"}

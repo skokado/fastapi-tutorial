@@ -17,6 +17,24 @@
             "env": {
                 "DEBUG": "1"
             }
+        },
+        {
+            "name": "Admin",
+            "type": "python",
+            "request": "launch",
+            "module": "gunicorn",
+            "args": [
+                "app.admin.main:app",
+                "--reload",
+                "--bind",
+                "0:5000",
+                "-t",
+                "3600"
+            ],
+            "jinja": true,
+            "env": {
+                "DEBUG": "1"
+            }
         }
     ]
 }
