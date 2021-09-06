@@ -13,3 +13,6 @@ class User(Base):
     password = sa.Column(sa.String, nullable=False)
 
     blogs = relationship('Blog', back_populates='creator')
+
+    def __str__(self):
+        return f'{self.name} ({self.email})'
