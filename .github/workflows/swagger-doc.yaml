@@ -21,6 +21,7 @@ jobs:
           python3 -m pipenv install --system
       - name: build
         run: |
+          touch .env
           python3 -c "import json; from app.main import app; print(json.dumps(app.openapi(), indent=2))" > docs/swagger/openapi.json
       - name: save artifacts
         uses: actions/upload-artifact@v2
