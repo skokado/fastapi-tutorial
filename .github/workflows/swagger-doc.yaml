@@ -3,6 +3,7 @@ name: Generate OpenAPI doc
 #   push:
 #     branches:
 #       - master
+on: push
 
 jobs:
   build:
