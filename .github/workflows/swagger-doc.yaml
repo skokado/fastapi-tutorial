@@ -1,9 +1,8 @@
 name: Generate OpenAPI doc
-# on:
-#   push:
-#     branches:
-#       - master
-on: push
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   build:
