@@ -1,0 +1,33 @@
+name: unittest, generate API doc
+on: push
+
+jobs:
+  ci:
+    name: ci
+    runs-on: ubuntu-20.04
+    container: python:3.8-buster
+    # Using external postgres docker container.
+    # https://docs.github.com/ja/actions/using-containerized-services/creating-postgresql-service-containers
+    services:
+      test_db:
+        image: postgres:13.4
+        env:
+          POSTGRES_USER: app
+          POSTGRES_PASSWORD: secret
+          POSTGRES_DB: app
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      TEST_PGHOST: test_db
+      TEST_PGPORT: 5432
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Python Libraries
+        run: |
+          pip3 install pipenv
+          pipenv install --system --dev
+      - name: test
+        run: pytest

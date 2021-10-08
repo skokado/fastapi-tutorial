@@ -18,10 +18,16 @@ flask = "*"
 flask-admin = "*"
 flask-sqlalchemy = "*"
 celery = {extras = ["redis"], version = "*"}
+install = "*"
+sqlalchemy-utils = "*"
 
 [dev-packages]
 flake8 = "*"
 aiofiles = "*"
+pytest = "*"
+pytest-cov = "*"
+factory-boy = "*"
+requests = "*"
 
 [requires]
 python_version = "3.8"
