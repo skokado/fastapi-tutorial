@@ -7,7 +7,8 @@ from dotenv import load_dotenv
 from pydantic import AnyHttpUrl, BaseSettings, PostgresDsn, validator
 
 BASE_DIR = Path(__file__).parent.parent.parent
-env_path = BASE_DIR / '.env'
+env_file = os.getenv('ENV_FILE', '.env')
+env_path = BASE_DIR / env_file
 if not env_path.exists():
     raise OSError('.env file not exists.')
 
