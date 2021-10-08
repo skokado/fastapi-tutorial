@@ -9,9 +9,14 @@ jobs:
   ci:
     name: ci
     runs-on: ubuntu-20.04
+    container: python:3.8-buster
+    services:
+      test_db:
+        image: postgres:13.4
+    env:
+      TEST_PGHOST: test_db
+      TEST_PGPORT: 5432
     steps:
-      - uses: actions/checkout@master
-      - uses: actions/setup-python@v2
         with:
           python-version: '3.8'
           architecture: 'x64'
