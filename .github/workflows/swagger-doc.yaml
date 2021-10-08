@@ -29,14 +29,14 @@ jobs:
             docs/swagger
 
       - name: Setup Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
-          node-version: 12.x
+          node-version: '14'
 
-      - name: Install cli
-        run: npm install netlify-cli -g
+      - name: Install Netlify Cli
+        run: npm install -g netlify-cli
 
-      - name: deploy
+      - name: deploy to Netlify
         run: npx netlify-cli deploy --dir=./docs/swagger
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
