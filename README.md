@@ -45,3 +45,20 @@ $ docker run -d --rm \
 ```shell
 $ alembic upgrade head
 ```
+
+# Test
+
+テスト用DBコンテナ起動
+
+```shell
+$ # Postgresql
+$ docker run -d --rm \
+   --name test_db \
+  -p 5433:5432 \
+  -e POSTGRES_USER=app \
+  -e POSTGRES_PASSWORD=secret \
+  -e POSTGRES_DB=app \
+  postgres:13.4
+
+$ ENV_FILE=test.env pytest app/tests
+```
