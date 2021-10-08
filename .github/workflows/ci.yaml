@@ -17,9 +17,6 @@ jobs:
       TEST_PGHOST: test_db
       TEST_PGPORT: 5432
     steps:
-        with:
-          python-version: '3.8'
-          architecture: 'x64'
       - name: Setup Python Libraries
         run: |
           python3 -m pip install pipenv
