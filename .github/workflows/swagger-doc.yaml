@@ -34,10 +34,10 @@ jobs:
           node-version: '14'
 
       - name: Install Netlify Cli
-        run: npm install -g netlify-cli
+        run: yarn add netlify-cli
 
       - name: deploy to Netlify
-        run: npx netlify-cli deploy --dir=./docs/swagger
+        run: ./node_modules/netlify-cli/bin/run deploy --dir=./docs/swagger
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
