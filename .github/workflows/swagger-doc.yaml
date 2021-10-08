@@ -1,8 +1,9 @@
 name: Generate OpenAPI doc
-on:
-  push:
-    branches:
-      - master
+# on:
+#   push:
+#     branches:
+#       - master
+on: push
 
 jobs:
   build:
@@ -15,12 +16,28 @@ jobs:
         run: |
           pip3 install pipenv
           pipenv install --system
+
       - name: build
         run: |
           python3 -c "import json; from app.main import app; print(json.dumps(app.openapi(), indent=2))" > docs/swagger/openapi.json
+
       - name: save artifacts
         uses: actions/upload-artifact@v2
         with:
           name: API doc
           path: |
             docs/swagger
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+
+      - name: Install cli
+        run: npm install netlify-cli -g
+
+      - name: deploy
+        run: npx netlify-cli deploy --dir=./docs/swagger
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
