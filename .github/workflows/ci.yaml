@@ -7,7 +7,7 @@ on: push
 
 jobs:
   ci:
-    name: setup
+    name: ci
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@master
@@ -19,29 +19,13 @@ jobs:
         run: |
           python3 -m pip install pipenv
           python3 -m pipenv install --system --dev
-    name: test
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@master
-      - uses: actions/setup-python@v2
-        with:
-          python-version: '3.8'
-          architecture: 'x64'
       - name: test
-        run: |
-          pytest
-    name: Generate API doc
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@master
-      - uses: actions/setup-python@v2
-        with:
-          python-version: '3.8'
-          architecture: 'x64'
-      - name: build
+        run: pytest
+      - name: Generate API doc
         run: |
           echo "make dummpy .env" ; touch .env
           python3 -c "import json; from app.main import app; print(json.dumps(app.openapi(), indent=2))" > docs/swagger/openapi.json
+      - name: artifact
         uses: actions/upload-artifact@v2
         with:
           name: API doc
