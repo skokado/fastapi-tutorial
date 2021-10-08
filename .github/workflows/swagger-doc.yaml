@@ -35,8 +35,8 @@ jobs:
 
       - name: Install Netlify Cli
         run: |
-        npm install -g yarn
-        yarn add netlify-cli
+          npm install -g yarn
+          yarn add netlify-cli
 
       - name: deploy to Netlify
         run: ./node_modules/netlify-cli/bin/run deploy --dir=./docs/swagger
