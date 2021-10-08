@@ -13,11 +13,21 @@ jobs:
     services:
       test_db:
         image: postgres:13.4
+        env:
+          POSTGRES_USER: app
+          POSTGRES_PASSWORD: secret
+          POSTGRES_DB: app
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     env:
       TEST_PGHOST: test_db
       TEST_PGPORT: 5432
     steps:
       - name: Setup Python Libraries
+        uses: actions/checkout@v2
         run: |
           python3 -m pip install pipenv
           python3 -m pipenv install --system --dev
