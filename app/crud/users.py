@@ -34,3 +34,15 @@ def create(request: schemas.User, db: Session):
             detail=e.args[0]
         )
     return new_user
+
+
+def delete(id: int, db: Session):
+    user = db.query(User).filter(User.id == id).first()
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f'User id {id} not found.'
+        )
+    db.delete(user)
+    db.commit()
+    return {'detail': f'user id={user.id} deleted'}
